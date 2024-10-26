@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaGym</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url(alphaa.jpg); /* Asegúrate de que la imagen esté en el mismo directorio que tu archivo HTML */
+            background-size: cover;
+            background-position: center;
+            color: black;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+
+        .container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: black; /* Fondo negro con opacidad */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            position: fixed; /* Fija la barra en la parte superior */
+            top: 0;
+            left: 0;
+        }
+
+        /* Estilo del logo lateral izquierdo */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Estilo del menú horizontal */
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 18px;
+            text-decoration: none;
+            padding: 10px;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 8px;
+        }
+
+        nav a:hover {
+            background-color: #444;
+            color: #fff;
+        }
+
+        /* Contenido principal del sitio */
+        .main-content {
+            width: 100%;
+            max-width: 1200px;
+            padding: 80px 20px; /* Ajusta el padding para que el contenido no se superponga con la barra */
+            text-align: center;
+            margin-top: 60px; /* Agrega un margen para evitar superposición */
+        }
+
+        .main-content h1 {
+            font-size: 48px;
+            color: #fff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .main-content p {
+            font-size: 20px;
+            color: #ddd;
+            margin-bottom: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .main-content h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Contenedor del menú -->
+<div class="container">
+    <div class="logo">
+        AlphaGym
+    </div>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">+Cliente</a>
+        <a href="#">Buscar Cliente</a>
+    </nav>
+</div>
+
+<!-- Contenido principal -->
+<div class="main-content">
+    <h1>Bienvenido a AlphaGym</h1>
+    <p>Entrena con nosotros y lleva tu cuerpo al siguiente nivel.</p>
+</div>
+</body>
+</html>

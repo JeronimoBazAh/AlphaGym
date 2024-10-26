@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlphaGym - Buscar Cliente</title>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url(alphaa.jpg); /* Asegúrate de que la imagen esté en el mismo directorio que tu archivo HTML */
+            background-size: cover;
+            background-position: center;
+            color: black;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo negro con opacidad */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 18px;
+            text-decoration: none;
+            padding: 10px;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 8px;
+        }
+
+        nav a:hover {
+            background-color: #444;
+            color: #fff;
+        }
+
+        .main-content {
+            width: 100%;
+            max-width: 1200px;
+            padding: 80px 20px;
+            text-align: center;
+            margin-top: 80px; /* Ajuste de margen para el contenido */
+        }
+
+        .main-content h1 {
+            font-size: 48px;
+            color: #fff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .search-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+
+        .search-container input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .search-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .search-container button:hover {
+            background-color: #666;
+        }
+
+        .client-info, .purchase-history {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            color: #fff;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .purchase-history table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .purchase-history table, th, td {
+            border: 1px solid #fff;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .main-content h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Contenedor del menú -->
+<div class="container">
+  <div class="logo">
+    AlphaGym
+  </div>
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#">+Cliente</a>
+    <a href="#">Buscar Cliente</a>
+  </nav>
+</div>
+
+<!-- Contenido principal -->
+<div class="main-content">
+  <h1>Buscar Cliente</h1>
+
+  <!-- Contenedor de búsqueda por DNI -->
+  <div class="search-container">
+    <input type="text" id="dniInput" placeholder="Ingrese DNI del cliente">
+    <button onclick="buscarCliente()">Buscar</button>
+  </div>
+
+  <!-- Información del cliente -->
+  <div class="client-info" id="clientInfo" style="display: none;">
+    <h2>Datos del Cliente</h2>
+    <p><strong>Nombre:</strong> <span id="nombre"></span></p>
+    <p><strong>Apellido:</strong> <span id="apellido"></span></p>
+    <p><strong>DNI:</strong> <span id="dni"></span></p>
+    <p><strong>Sexo:</strong> <span id="sexo"></span></p>
+  </div>
+
+  <!-- Historial de compras -->
+  <div class="purchase-history" id="purchaseHistory" style="display: none;">
+    <h2>Historial de Compras</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+      </tr>
+      </thead>
+      <tbody id="comprasBody">
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+    // Simulación de base de datos de clientes
+    const clientes = [
+        {
+            dni: "12345678",
+            nombre: "Juan",
+            apellido: "Pérez",
+            sexo: "Masculino",
+            compras: [
+                { fecha: "2024-01-15", descripcion: "Membresía Mensual", precio: "$40" },
+                { fecha: "2024-02-15", descripcion: "Entrenamiento Personal", precio: "$60" },
+                { fecha: "2024-03-15", descripcion: "Membresía Mensual", precio: "$40" }
+            ]
+        },
+        {
+            dni: "87654321",
+            nombre: "Ana",
+            apellido: "Gómez",
+            sexo: "Femenino",
+            compras: [
+                { fecha: "2024-02-10", descripcion: "Membresía Trimestral", precio: "$100" },
+                { fecha: "2024-05-10", descripcion: "Clases de Yoga", precio: "$30" }
+            ]
+        }
+    ];
+
+    function buscarCliente() {
+        const dni = document.getElementById("dniInput").value;
+        const cliente = clientes.find(c => c.dni === dni);
+
+        if (cliente) {
+            // Mostrar datos del cliente
+            document.getElementById("clientInfo").style.display = "block";
+            document.getElementById("nombre").innerText = cliente.nombre;
+            document.getElementById("apellido").innerText = cliente.apellido;
+            document.getElementById("dni").innerText = cliente.dni;
+            document.getElementById("sexo").innerText = cliente.sexo;
+
+            // Mostrar historial de compras
+            const comprasBody = document.getElementById("comprasBody");
+            comprasBody.innerHTML = ""; // Limpiar el contenido previo
+            cliente.compras.forEach(compra => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${compra.fecha}</td>
+                    <td>${compra.descripcion}</td>
+                    <td>${compra.precio}</td>
+                `;
+                comprasBody.appendChild(row);
+            });
+
+            document.getElementById("purchaseHistory").style.display = "block";
+        } else {
+            alert("Cliente no encontrado");
+        }
+    }
+</script>
+
+</body>
+</html>
